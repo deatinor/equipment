@@ -32,11 +32,6 @@ class HelloWindow(QMainWindow):
         right=QDialog()
         top=QDialog()
 
-        gridLayout.addWidget(top,0,0,2,2)
-        gridLayout.addWidget(buttonsLeft,2,0,1,1)
-        gridLayout.addWidget(buttonsRight,2,1,1,1)
-        gridLayout.addWidget(left,3,0,8,1)
-        gridLayout.addWidget(right,3,1,8,1)
 
 
 
@@ -47,16 +42,16 @@ class HelloWindow(QMainWindow):
         addUserButton.clicked.connect(self.addUser)
 
 
-        pyButton=QPushButton('Click Me', left)
-        pyButton.resize(100,32)
-        #  pyButton.move(50,50)
-        pyButton.clicked.connect(self.clickMethod)
+        #  pyButton=QPushButton('Click Me', left)
+        #  pyButton.resize(100,32)
+        #  #  pyButton.move(50,50)
+        #  pyButton.clicked.connect(self.clickMethod)
 
 
-        pyButton2=QPushButton('Click Me', right)
-        pyButton2.resize(100,32)
-        #  pyButton.move(50,50)
-        pyButton2.clicked.connect(self.clickMethod)
+        #  pyButton2=QPushButton('Click Me', right)
+        #  pyButton2.resize(100,32)
+        #  #  pyButton.move(50,50)
+        #  pyButton2.clicked.connect(self.clickMethod)
 
 
         top.setStyleSheet("QDialog{background-color: pink;}")
@@ -65,16 +60,23 @@ class HelloWindow(QMainWindow):
 
 
 
-        self.tableEquipment=QTableWidget(0,1,left)
-        #  self.tableEquipment.setSizePolicy(QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Minimum)
-        self.tableEquipment.resizeColumnsToContents(1)
+        self.tableEquipment=QTableWidget(0,1)
+        self.tableEquipment.resize(1,1)
+        self.tableEquipment.horizontalHeader().setStretchLastSection(True)
         for i in range(0):
             self.tableEquipment.setItem(i,0,QTableWidgetItem(data[i]))
 
-        self.tableUsers=QTableWidget(0,1,right)
+
+        self.tableUsers=QTableWidget(0,1)
+        self.tableUsers.horizontalHeader().setStretchLastSection(True)
         for i in range(0):
             self.tableUsers.setItem(i,0,QTableWidgetItem(data[i]))
 
+        gridLayout.addWidget(top,0,0,2,2)
+        gridLayout.addWidget(buttonsLeft,2,0,1,1)
+        gridLayout.addWidget(buttonsRight,2,1,1,1)
+        gridLayout.addWidget(self.tableEquipment,3,0,8,1)
+        gridLayout.addWidget(self.tableUsers,3,1,8,1)
         
     
     def clickMethod(self):
